@@ -1,8 +1,8 @@
-# TrainingTube 2.0 Frontend #
+# VideoTube Frontend #
 
 ### What is this repository for? ###
 
-* The TrainingTube 2.0 Frontend - based on Angular/Fuse 
+* VideoTube Frontend - based on Angular/Fuse 
 * Version 0.1
 
 ### How do I get set up? ###
