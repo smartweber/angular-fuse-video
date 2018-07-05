@@ -1,0 +1,80 @@
+<!-- SIDENAV HEADER -->
+<div fxLayout="column" fxLayoutAlign="space-between start"
+     class="header p-24 pb-4" ngClass="mat-accent-bg" ngClass.gt-md="white-fg">
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<!-- SIDENAV CONTENT -->
+<div class="content" fusePerfectScrollbar *fuseIfOnDom [@animate]="{value:'*',params:{y:'50px'}}">
+
+    <div class="nav">
+        <div class="nav-item">
+            <a class="nav-link" matRipple
+                (click)="filterByAll()"
+                [ngClass]="{
+                    'active':filtersByFormat.length === 0 && filtersByStatus.length === 0  && filtersByType.length === 0,
+                    'disabled': isInprogress
+                }"
+            >
+                <mat-icon class="nav-link-icon">view_headline</mat-icon>
+                <span>All</span>
+            </a>
+        </div>
+
+        <div class="nav-subheader">Format</div>
+
+        <div class="nav-item" aria-label="inbox">
+             <a
+                *ngFor="let format of formats"
+                class="nav-link"
+                matRipple
+            >
+                <mat-checkbox class="font-size-14"
+                    (change)="changeFormatFiltered($event, format['label'])"
+                    [(ngModel)]="statusesChecked[format['label']]"
+                    [disabled]="isInprogress">
+                    {{ format['label'] }} ({{ format['count'] }})
+                </mat-checkbox>
+            </a>
+        </div>
+
+        <div class="nav-subheader">Status</div>
+
+        <div class="nav-item">
+            <a
+                *ngFor="let status of statuses"
+                class="nav-link"
+                matRipple
+            >
+                <mat-checkbox class="font-size-14"
+                    (change)="changeStatusFiltered($event, status['label'])"
+                    [(ngModel)]="statusesChecked[status['label']]"
+                    [disabled]="isInprogress">
+                    {{ status['label'] }} ({{ status['count'] }})
+                </mat-checkbox>
+            </a>
+        </div>
+
+        <div class="nav-subheader">Type</div>
+
+        <div class="nav-item">
+            <a
+                *ngFor="let type of types"
+                class="nav-link"
+                matRipple
+            >
+                <mat-checkbox class="font-size-14"
+                    (change)="changeTypeFiltered($event, type['label'])"
+                    [(ngModel)]="typesChecked[type['label']]"
+                    [disabled]="isInprogress">
+                    {{ type['label'] }} ({{ type['count'] }})
+                </mat-checkbox>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+<!-- / SIDENAV CONTENT -->
+

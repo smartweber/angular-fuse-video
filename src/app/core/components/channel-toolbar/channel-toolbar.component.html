@@ -1,0 +1,86 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  
+  <div class="navigation-section" *ngIf="!isAdmin">
+    <button mat-raised-button 
+      class="none-shadow"
+      [routerLink]="[channelUri +'/home/detail']"
+      [ngClass]="pageName === 'home' ? 'mat-accent' : ''"
+    >Home</button>
+    <button mat-raised-button 
+      class="none-shadow"
+      [routerLink]="[channelUri +'/videos']"
+      [ngClass]="pageName === 'videos' ? 'mat-accent' : ''"
+    >Videos</button>
+    <button mat-raised-button
+      class="none-shadow"
+      [routerLink]="[channelUri +'/tracks']"
+      [ngClass]="pageName === 'tracks' ? 'mat-accent' : ''"
+    >Tracks</button>
+    <button mat-raised-button
+      class="none-shadow"
+      [routerLink]="[channelUri +'/contacts']"
+      [ngClass]="pageName === 'contacts' ? 'mat-accent' : ''"
+    >Contacts</button>
+    <button mat-raised-button
+      class="none-shadow"
+      [routerLink]="[channelUri +'/todo/all']"
+      [ngClass]="pageName === 'tasks' ? 'mat-accent' : ''"
+    >Tasks</button>
+    <button mat-raised-button 
+      class="none-shadow"
+      [routerLink]="[channelUri +'/mail/inbox']"
+      [ngClass]="pageName === 'support' ? 'mat-accent' : ''"
+    >Support</button>  
+  </div>
+
+  <div class="navigation-section" *ngIf="pageName === 'tracks' && isAdmin">
+    <button mat-raised-button class="none-shadow" (click)="doneTrackEdit()">Save and close</button>
+    <button mat-raised-button class="none-shadow" [ngClass]="type === 'text' ? 'mat-accent' : ''" (click)="openTrackAdminPanel('text')">Text</button>
+    <button mat-raised-button class="none-shadow" [ngClass]="type === 'effects' ? 'mat-accent' : ''" (click)="openTrackAdminPanel('effects')">Effects</button>
+    <button mat-raised-button class="none-shadow" [ngClass]="type === 'manuscript' ? 'mat-accent' : ''" (click)="openTrackAdminPanel('manuscript')">Manuscript</button>
+    <button mat-raised-button class="none-shadow" [ngClass]="type === 'quick_guide' ? 'mat-accent' : ''" (click)="openTrackAdminPanel('quick_guide')">Quick Guide</button>
+    <button mat-raised-button class="none-shadow" [ngClass]="type === 'speak' ? 'mat-accent' : ''" (click)="openTrackAdminPanel('speak')">Speak</button>
+  </div>
+
+  <div *ngIf="pageName === 'tracks' && !isAdmin && trackId && stepId">
+    <a mat-button [matMenuTriggerFor]="editChannelMenu">
+      Edit
+    </a>
+
+    <mat-menu #editChannelMenu="matMenu" [overlapTrigger]="false">
+
+      <button mat-menu-item (click)="openTrackAdminPanel('text')">
+        Text
+      </button>
+
+      <button mat-menu-item (click)="openTrackAdminPanel('effects')">
+        Effects
+      </button>
+
+      <button mat-menu-item (click)="openTrackAdminPanel('manuscript')">
+        Manuscript
+      </button>
+
+      <button mat-menu-item (click)="openTrackAdminPanel('quick_guide')">
+        Quick Guide
+      </button>
+
+       <button mat-menu-item (click)="openTrackAdminPanel('speak')">
+        Speak
+      </button>
+
+    </mat-menu>
+  </div>
+
+  <div class="navigation-section" *ngIf="pageName === 'home' && isAdmin">
+    <button mat-raised-button class="none-shadow" (click)="doneHomeEdit()">Save and close</button>
+    <button mat-raised-button class="none-shadow mat-accent" (click)="openHomeAdminPanel()">Text</button>
+  </div>
+
+  <div *ngIf="pageName === 'home' && !isAdmin">
+    <a mat-button (click)="openHomeAdminPanel()">
+      Edit
+    </a>
+  </div>
+
+</div>

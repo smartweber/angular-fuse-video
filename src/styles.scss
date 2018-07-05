@@ -1,0 +1,162 @@
+// Import Fuse main library
+@import "app/core/scss/core";
+
+.no {
+  .mat-input-wrapper {
+    padding: 0px;
+  }
+
+  .mat-input-infix {
+    padding: 0px;
+    border: 0px;
+  }
+}
+
+.link-class {
+  cursor: pointer;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.link-menu-item {
+  min-width: 10em;
+
+  &:hover {
+    text-decoration: none !important;  
+  }
+}
+
+.scrollable-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+
+  .dropdown-item {
+    padding: 16px 8px;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    .avatar {
+      margin-right: 16px;
+    }
+
+    .username {
+      font-weight: 500;
+    }
+
+    .message {
+      font-weight: 500;
+    }
+
+    .time {
+    }
+  }
+}
+
+.static-panel {
+  .mat-expansion-panel-header{
+    height: 48px !important;  
+  }
+  
+  .mat-expansion-panel-body {
+    padding: 0 !important;
+  }
+}
+
+vg-player {
+  video {
+    width: 100%;
+  }
+
+  vg-controls {
+    .icon {
+      &:before {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.ngx-contextmenu .dropdown-menu {
+  z-index: 1000;
+  min-width: 120px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  list-style: none;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.ngx-contextmenu li {
+  display: block;
+  border-top: solid 1px #ccc;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.ngx-contextmenu li:first-child {
+  border-top:none;
+}
+
+.ngx-contextmenu a {
+  display: block;
+}
+
+.ngx-contextmenu a .item {
+  padding: 0.5em 1em;
+}
+
+.ngx-contextmenu a:hover {
+  background-color: rgba(0,0,0,.15);
+}
+
+table {
+  color: rgba(0, 0, 0, 0.85);
+
+  &.table-bordered {
+    tr {
+      td, th {
+        border: 1px solid #ddd;
+      }
+    }  
+  }
+
+  tr {
+    td, th {
+      padding: 8px;
+    }
+  }
+}
+
+.responsive-table {
+  overflow-y: auto;
+}
+
+.green-text {
+  color: mat-color($mat-green, 500) !important;
+}
+
+.blue-text {
+  color: mat-color($mat-blue, 500) !important;
+}
+
+.no-padding-accordion {
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
+}

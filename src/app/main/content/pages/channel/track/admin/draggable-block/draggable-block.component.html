@@ -1,0 +1,17 @@
+<div class="draggable-block-area position-relative" #draggableEle (mousemove)='onCornerMove($event)'>
+    <div class="draggable-block-item"
+    [ngClass]="{
+    'move': draggingWindow,
+    'mat-green-800-bg': effectActionType === 'trim',
+    'mat-yellow-500-bg': effectActionType === 'blur',
+    'mat-red-500-bg': effectActionType === 'chapter'
+    }"
+    [style.left.%]="effectActionLeft"
+    [style.width.%]="effectActionWidth"
+    (mousedown)='onWindowPress($event)'
+    (mousemove)='onWindowDrag($event)'
+    (mouseup)='onWindowUp()'>
+        <div (mousedown)='onCornerClick($event, leftResizeClick)' class='left-resize corner-resize' *ngIf="effectActionType !== 'chapter'"></div>
+        <div (mousedown)='onCornerClick($event, rightResizeClick)' class='right-resize corner-resize'></div>  
+    </div>
+</div>

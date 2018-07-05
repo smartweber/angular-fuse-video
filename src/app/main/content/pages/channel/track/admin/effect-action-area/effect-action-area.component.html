@@ -1,0 +1,15 @@
+<div class="blur-effect-area" fxFill fxFlex>
+
+  <div *ngFor="let effectAction of effectActions;let i = index;" class="effectAction-item-container position-relative">
+    <div class="effectAction-item">
+      <app-draggable-block
+        [effectIndex] = "i"
+        [effectActionWidth]="effectAction.width"
+        [effectActionLeft]="effectAction.pos"
+        [effectActionType]="effectAction.type"
+        (changeWidthEvent)="onChangeWidthEvent($event)"
+      ></app-draggable-block>
+    </div>
+  </div>
+
+</div>

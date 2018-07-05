@@ -1,0 +1,27 @@
+<div fxFlex fxFill fxLayoutAlign>
+
+  <div fxFlex fxLayout="row" fxLayoutAlign #effectArea (mousemove)="onMouseMoveHandler($event)" (mouseup)="onMouseUp()">
+
+    <div fxLayoutAlign *ngFor="let chapter of chapters;let i = index;let last = last;" [style.width.%]="chapter.widthP"  (contextmenu)="onContextMenu($event, chapter, i)" (click)="onClickChapter($event, i)" (dblclick)="onSelectChapter(i)">
+      <div class="chapter-item" fxFlex fxLayoutAlign [ngClass]="{'mat-primary-A400-bg': i !== selectedChapter, 'mat-green-100-bg': i === selectedChapter}">
+        <div class="handler mat-primary-A100-bg resizable" (mousedown)="onMouseDownHandler($event, i)" *ngIf="!last"></div>
+        <app-draggable-block
+          *ngIf="chapter.activatedAction !== -1"
+          [effectIndex]="i"
+          [effectActionLeft]="0"
+          [effectActionWidth]="chapter['effects']['timeWidthP']"
+          [effectActionType]="'chapter'"
+          (changeWidthEvent)="onChangeWidthEvent($event)"
+        ></app-draggable-block>
+      </div>
+    </div>
+
+    <context-menu #effectMenu>
+      <ng-template contextMenuItem>
+        <button class="item full-width" (click)="onSplit()">Split</button>
+      </ng-template>
+    </context-menu>
+
+  </div>
+
+</div>

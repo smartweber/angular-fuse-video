@@ -1,0 +1,114 @@
+<div id="contacts" class="page-layout carded left-sidenav" fusePerfectScrollbar>
+
+    <!-- TOP BACKGROUND -->
+    <div class="bread-scrumb-area pr-12 pl-12">
+        <div fxLayout>
+            <app-bread-scrumb
+                [breadcrumbs]="breadcrumbs"
+            ></app-bread-scrumb>        
+        </div>
+    </div>
+
+    <div class="top-bg channel-top-bg">
+        <div class="overlay-bg" fxFill fxLayout fxLayoutAlign="start stretch">
+            <div fxLayout="row" fxLayoutAlign="space-between end" class="channel-info mr-20 ml-20">
+                <div fxLayout="row" class="full-width" fxLayoutAlign="space-between start">
+                    <div fxLayout="row">
+                        <div class="channel-logo"></div>
+                        <div class="channel-text ml-12">
+                            <h1>
+                                <strong>{{ channelName }}</strong>
+                            </h1>
+                            <div class="description">
+                                <h3>{{ channelAbstact }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- SELECTED BAR -->
+    <fuse-selected-bar class="mat-accent-600-bg" *ngIf="hasSelectedContacts" [@slideInTop]></fuse-selected-bar>
+    <!-- / SELECTED BAR -->
+
+    <mat-sidenav-container>
+
+        <!-- SIDENAV -->
+        <mat-sidenav class="sidenav" align="start" opened="true" mode="side"
+                     fuseMatSidenavHelper="carded-left-sidenav" mat-is-locked-open="gt-md">
+
+            <fuse-contacts-main-sidenav *fuseIfOnDom [@animate]="{value:'*'}"></fuse-contacts-main-sidenav>
+
+        </mat-sidenav>
+        <!-- / SIDENAV -->
+
+        <!-- CENTER -->
+        <div class="center">
+
+            <!-- CONTENT HEADER -->
+            <div class="header" fxLayout="row" fxLayoutAlign="start center">
+
+            </div>
+            <!-- / CONTENT HEADER -->
+
+            <!-- CONTENT CARD -->
+            <div class="content-card mat-white-bg" fxLayout="column">
+
+                <!-- CONTENT TOOLBAR -->
+                <div class="toolbar px-24 py-8" fxFlex fxLayout>
+
+                    <button mat-button class="mat-icon-button sidenav-toggle"
+                            fuseMatSidenavToggler="carded-left-sidenav"
+                            fxHide.gt-md>
+                        <mat-icon>menu</mat-icon>
+                    </button>
+
+                    <div class="full-width">
+                        <app-channel-toolbar
+                        [channelId]="channelId"
+                        [pageName]="'contacts'"
+                        ></app-channel-toolbar>
+                    </div>
+
+                </div>
+                <!-- / CONTENT TOOLBAR -->
+
+                <!-- CONTENT -->
+                <div class="content" fxLayout="column">
+                    <div class="px-24 py-8">
+                        <!-- SEARCH -->
+                        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                            <div class="search mat-white-bg" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                                <mat-icon>search</mat-icon>
+                                <input matInput [formControl]="searchInput" id="search" placeholder="Search for anything">
+                            </div>
+                        </div>
+                        <!-- / SEARCH -->
+                    </div>
+
+                    <div fxFlex fxLayout="row">
+                        <fuse-contacts-contact-list fusePerfectScrollbar fxFlex></fuse-contacts-contact-list>
+                    </div>
+
+                </div>
+                <!-- / CONTENT -->
+
+            </div>
+            <!-- / CONTENT CARD -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </mat-sidenav-container>
+
+</div>
+
+<!-- ADD CONTACT BUTTON -->
+<button mat-fab class="mat-accent-bg" id="add-contact-button" (click)="newContact()" aria-label="add contact"
+        *fuseIfOnDom [@animate]="{value:'*', params:{delay:'300ms',scale:'.2'}}">
+    <mat-icon>person_add</mat-icon>
+</button>
+<!-- / ADD CONTACT BUTTON -->

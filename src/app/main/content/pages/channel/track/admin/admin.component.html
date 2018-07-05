@@ -1,0 +1,169 @@
+<div class="channel-edit" fxFlex fxLayout="column" fxLayoutAlign>
+  <div class="description mb-8">
+    <div class="mat-headline">
+      {{ videoData['data']['title'] }}
+    </div>
+
+    <div class="video-id">
+      ID: KBSDFES123G | Status: {{ videoData['data']['status'] }} | Author: {{ videoData['data']['author'] }}
+    </div>
+  </div>
+
+  <div class="content" fxFlex fxLayout="row" fxLayoutAlign>
+
+    <div class="video-area mr-8" fxFlex="66.66" fxLayout="column" fxLayoutAlign><!-- video area  -->
+
+      <div class="video-player position-relative"><!-- video player  -->
+
+        <div class="video-container" *ngIf="videoSourceUrl">
+
+          <vg-player (onPlayerReady)="onPlayerReady($event)">
+            <!-- <vg-overlay-play></vg-overlay-play> -->
+            <vg-buffering></vg-buffering>
+
+            <video [vgMedia]="media" #media id="singleVideo" preload="auto" vg-responsive="true">
+              <source [src]="videoSourceUrl" type="video/mp4">
+            </video>
+          </vg-player>
+
+        </div>
+
+        <div class="canvas-wrapper" #canvasWrapperEle>
+          <canvas id="effect_canvas" #effectCanvas></canvas>
+        </div>
+
+      </div><!-- video player  -->
+
+      <div class="video-control mt-4" fxFlex="0 1 auto"><!-- video control  -->
+        <div fxLayoutAlign="center center" class="mat-primary-A100-bg position-relative p-8" *ngIf="api">
+          <div class="blur-action-area mx-8">
+            <button mat-raised-button color="primary" (click)="onTrim()">Trim</button>
+            <button mat-raised-button color="primary" (click)="onBlur()">Blur</button>
+            <button mat-raised-button color="primary" (click)="onSplit()">Split</button>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-icon-button (click)="onRewind()">
+              <mat-icon>fast_rewind</mat-icon>  
+            </button>
+
+            <button mat-icon-button (click)="onPlay()" *ngIf="api.state!==videoStatusList[0]">
+              <mat-icon>play_arrow</mat-icon>  
+            </button>
+
+            <button mat-icon-button (click)="onPause()" *ngIf="api.state===videoStatusList[0]">
+              <mat-icon>pause</mat-icon>  
+            </button>
+
+            <button mat-icon-button (click)="onForward()">
+              <mat-icon>fast_forward</mat-icon>  
+            </button>
+            
+            <div class="mx-8 timer-wrapper" fxLayoutAlign="center center">
+              <span class="font-size-14 primary-200-fg">{{ api?.currentTime | formatTime: 'hours' }}</span>: 
+              <span>{{ api?.currentTime | formatTime: 'minute' }}</span>:
+              <span>{{ api?.currentTime | formatTime: 'second' }}</span>:
+              <span class="font-size-10">{{ api?.currentTime | formatTime: 'miniSec' }}</span>
+            </div>
+          </div>
+
+          <div class="zoom-controller-area mx-8">
+            <mat-slider
+              [max]="scrubMaxRatio"
+              [min]="scrubMinRatio"
+              [step]="scrubStep"
+              [(ngModel)]="scrubRatio"
+              (change)="onChangeScrubSlider($event)"
+            ></mat-slider>
+          </div>
+        </div>
+
+        <div class="scrub-area position-relative" #scrbArea><!-- scrub-area  -->
+          <div class="scrubber-container"
+            #srubberEl
+            (mousedown)="onMouseDownScrubBar()"
+            [ngClass]="{'pointer': !isSeeking, 'move': isSeeking}"
+            [style.left.%]="scrubberLeftPercent"
+          ><!-- scrubber-container -->
+
+            <div class="time-scrubber"></div>
+            <div class="time-follower"></div>
+
+          </div><!-- scrubber-container -->
+
+          <div [style.width.%]="scrubWidth">
+            <div fxLayoutAlign="space-between start" class="mat-primary-A700-bg mb-0 timeline-labels font-size-12" 
+              #timelineEl
+              (mousemove)="onMouseMoveScrubBar($event)"
+            ><!-- timeline-labels -->
+              <div *ngFor="let timeline of timelines">
+                {{ timeline }}
+              </div>
+            </div><!-- timeline-labels -->
+
+            <div fxLayoutAlign="center center" class="effect effect-area mat-primary-A100-bg mb-4">
+              <app-effect-action-area
+                [(effectActions)]="effectActions"
+                [effectActionLength]="effectActions.length"
+              ></app-effect-action-area>          
+            </div>
+
+            <div fxLayoutAlign="start center" class="effect effect-area mat-primary-A100-bg">
+              <div class="effect-wrapper" [style.width.%]="videoEffectWidth">
+
+                <app-effect-chapter-area
+                  [(chapters)]="chapters"
+                  [(selectedChapter)]="selectedChapter"
+                  (selectChapterEvent)="selectChapterEvent($event)"
+                ></app-effect-chapter-area>
+
+              </div>
+            </div>
+          </div>
+
+        </div><!-- scrub-area  -->
+      </div><!-- video control  -->
+
+    </div><!-- video area  -->
+
+    <div class="list-area font-size-14" fxFlex="33.34" fxLayoutAlign *ngIf="isRenderedVideoData"><!-- list area  -->
+      <app-text
+        *ngIf="currentAdminType === adminTypes[0]"
+        [videoData]="videoData"
+        (videoDataChanged)="videoDataChanged($event)"
+      ></app-text>
+
+      <app-channel-configuration
+        *ngIf="currentAdminType === adminTypes[1] && keyboardCounter === keyboardCounterLoaded"
+        [chapters]="chapters"
+        [chapterLength]="chapters.length"
+        [selectedChapter]="selectedChapter"
+        (selectConfigurationChapter)="selectConfigurationChapter($event)"
+        (createHightlight)="createHightlight($event)"
+        (createCircle)="createCircle($event)"
+        (createCaption)="createCaption($event)"
+        (createKeyboard)="createKeyboard($event)"
+        (deleteChapter)="deleteChapter($event)"
+      ></app-channel-configuration>
+
+      <app-manuscript
+        *ngIf="currentAdminType === adminTypes[2]"
+        [chapters]="chapters"
+        [chapterLength]="chapters.length"
+        [selectedChapter]="selectedChapter"
+        (selectChapterEvent)="selectChapterEvent($event)"
+      ></app-manuscript>
+
+      <app-quick-guide
+        *ngIf="currentAdminType === adminTypes[3]"
+        [chapters]="chapters"
+        [chapterLength]="chapters.length"
+        [selectedChapter]="selectedChapter"
+        (selectChapterEvent)="selectChapterEvent($event)"
+        (changeBlurEvent)="changeBlurEvent($event)"
+      ></app-quick-guide>
+      
+    </div><!-- list area  -->
+
+  </div>
+</div>

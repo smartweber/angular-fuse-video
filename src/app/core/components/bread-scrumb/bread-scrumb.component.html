@@ -1,0 +1,6 @@
+<ol class="breadcrumb">
+  <li><a routerLink="/pg/home">Home</a></li>
+  <li *ngFor="let breadcrumb of breadcrumbs">
+    <a [routerLink]="[breadcrumb.url]" [queryParams]="breadcrumb.queryParams" >{{breadcrumb.label}}</a>
+  </li>
+</ol>

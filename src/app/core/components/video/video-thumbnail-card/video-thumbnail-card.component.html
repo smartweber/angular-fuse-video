@@ -1,0 +1,18 @@
+<div class="fuse-card p-8">
+
+  <a [routerLink]="videoLink">
+    
+    <div class="position-relative">
+      <img src="assets/images/cards/card3.jpg">
+      <div class="position-absolute font-size-18 white-fg p-16 align-left align-bottom" *ngIf="title">
+        Lorem ipsum dolor sit
+      </div>
+    </div>
+
+    <div class="font-size-12 pt-8 line-height-1.25" *ngIf="description">
+      {{ description }}
+    </div>
+        
+  </a>
+
+</div>

@@ -1,0 +1,27 @@
+.alert-title {
+  display: flex;
+
+  &.success {
+    color: green;
+
+    .mat-icon {
+      color: green;    
+    }
+  }
+
+  &.info {
+    color: blue;
+
+    .mat-icon {
+      color: blue;    
+    }
+  }
+
+  &.error {
+    color: red;
+
+    .mat-icon {
+      color: red;    
+    }
+  }
+}

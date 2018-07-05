@@ -1,0 +1,20 @@
+image: node:7.5.0
+
+pipelines:
+  default:
+    - step:
+        name: Build and Deploy
+        deployment: test
+        caches:
+          - node
+          - pip
+        script:
+          - apt-get update && apt-get install -y python-dev
+          - curl -O https://bootstrap.pypa.io/get-pip.py
+          - python get-pip.py
+          - pip install awscli
+          - npm install
+          - node ./node_modules/@angular/cli/bin/ng build --prod
+          - find . -type f -exec touch -t 201601011200 '{}' \;
+          - aws deploy push --application-name $APPLICATION_NAME --s3-location s3://$S3_BUCKET/$APPLICATION_NAME
+          - aws deploy create-deployment --application-name $APPLICATION_NAME --s3-location bucket=$S3_BUCKET,key=$APPLICATION_NAME,bundleType=zip --deployment-group-name $DEPLOYMENT_GROUP_NAME --file-exists-behavior OVERWRITE      

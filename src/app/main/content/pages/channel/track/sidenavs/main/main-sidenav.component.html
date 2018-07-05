@@ -1,0 +1,43 @@
+<div class="demo-sidenav">
+    <h3><strong>{{ channelName }}</strong></h3>
+
+    <mat-accordion class="no-padding-accordion" [displayMode]="'flat'">
+        <mat-expansion-panel *ngFor="let track of tracks" [expanded]="currentTrack === track['id']" hideToggle="true" (opened)="openTrack(track)">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <div fxFill fxLayout fxLayoutAlign="start center">
+                        <img [src]="track['data']['icon']" alt="" class="mr-8">
+                        <div>{{ track['data']['name'] }}</div>
+                    </div>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="steps" *ngIf="(isGetVideos && videos.length > 0);else anotherStepsEle">
+
+                <div class="step"
+                     *ngFor="let video of videos; let i = index; let last = last; let first = first"
+                     (click)="gotoStep(i, video.id)"
+                     [ngClass]="{'current': (currentStep === i && currentTrack === track['id']), 'completed': (currentStep > i  && currentTrack === track['id']), 'last': (last && currentTrack === track['id']), 'first': (first && currentTrack === track['id'])}">
+                    <div class="index">
+                        <span>{{i + 1}}</span>
+                    </div>
+                    <div class="title">{{ video['data']['title'] }}</div>
+                </div>
+
+            </div>
+
+            <ng-template #anotherStepsEle>
+                <div *ngIf="!isGetVideos;else noDataEle" class="px-24 py-8 alert-label">
+                    Loading...
+                </div>
+
+                <ng-template #noDataEle>
+                    <div class="px-24 py-8 alert-label">
+                        There is not videos in this track
+                    </div>
+                </ng-template>
+            </ng-template>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

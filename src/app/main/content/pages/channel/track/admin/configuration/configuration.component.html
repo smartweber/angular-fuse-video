@@ -1,0 +1,65 @@
+<div class="configuration-area">
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th style="width: 20%">Chapter</th>
+        <th style="width: 80%">Effect configuration</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let chapter of chapters;let i = index;" (dblclick)="onSelectChapter(i)" [ngClass]="{'mat-primary-A100-bg': i === selectedChapter}">
+        <td>
+          <div>{{ i + 1 }}</div>
+          <div>
+            <mat-icon class="pointer" (click)="onDeleteChapter(i)">delete</mat-icon>
+          </div>
+        </td>
+        <td>
+          
+          <div class="my-4" fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <mat-slide-toggle
+              [checked]="chapter?.effects?.configuration?.type === 'circle'"
+              (change)="onChangeCircle($event, i)"
+              [disabled]="i === selectedChapter && chapter['activatedAction'] !== -1 && chapter['activatedAction'] !== 0">Circle
+            </mat-slide-toggle>
+          </div>
+
+          <div class="my-4" fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <mat-slide-toggle
+              [checked]="chapter?.effects?.configuration?.type === 'highlight'"
+              (change)="onChangeHightlight($event, i)"
+              [disabled]="i === selectedChapter && chapter['activatedAction'] !== -1 && chapter['activatedAction'] !== 1">Highlight
+            </mat-slide-toggle>
+          </div>
+
+          <div class="my-4" fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <mat-slide-toggle
+              [checked]="chapter?.effects?.configuration?.type === 'caption'"
+              (change)="onChangeCaptionSlider($event, i)"
+              [disabled]="i === selectedChapter && chapter['activatedAction'] !== -1 && chapter['activatedAction'] !== 2">Caption
+            </mat-slide-toggle>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Both a label and a placeholder" [(ngModel)]="captions[i]" (change)="onChangeCaption(i)">
+            </mat-form-field>
+          </div>
+
+          <div class="my-4" fxLayout="row wrap" fxLayoutAlign="space-between center">
+            <mat-slide-toggle
+              [checked]="chapter?.effects?.configuration?.type === 'keyboard'"
+              (change)="onChangeKeyboardSlider($event, i)"
+              [disabled]="i === selectedChapter && chapter['activatedAction'] !== -1 && chapter['activatedAction'] !== 3">Keyboard
+            </mat-slide-toggle>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Both a label and a placeholder" [(ngModel)]="keyboards[i]" (change)="onChangeKeyboard(i)">
+            </mat-form-field>
+          </div>
+
+        </td>
+      </tr>      
+    </tbody>
+
+  </table>
+
+</div>

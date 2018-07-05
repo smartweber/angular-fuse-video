@@ -1,0 +1,141 @@
+<div id="todo" class="page-layout carded left-sidenav" fusePerfectScrollbar>
+
+    <!-- TOP BACKGROUND -->
+    <div class="bread-scrumb-area pr-12 pl-12">
+        <div fxLayout>
+            <app-bread-scrumb
+                [breadcrumbs]="breadcrumbs"
+            ></app-bread-scrumb>        
+        </div>
+    </div>
+
+    <div class="top-bg channel-top-bg">
+        <div class="overlay-bg" fxFill fxLayout fxLayoutAlign="start stretch">
+            <div fxLayout="row" fxLayoutAlign="space-between end" class="channel-info mr-20 ml-20">
+                <div fxLayout="row" class="full-width" fxLayoutAlign="space-between start">
+                    <div fxLayout="row">
+                        <div class="channel-logo"></div>
+                        <div class="channel-text ml-12">
+                            <h1>
+                                <strong>{{ channelName }}</strong>
+                            </h1>
+                            <div class="description">
+                                <h3>{{ channelAbstact }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / TOP BACKGROUND -->
+
+    <mat-sidenav-container>
+
+        <!-- SIDENAV -->
+        <mat-sidenav class="sidenav" align="start" opened="true" mode="side"
+                     fuseMatSidenavHelper="carded-left-sidenav" mat-is-locked-open="gt-md">
+            <fuse-todo-main-sidenav
+            [channelId]="channelId"
+            ></fuse-todo-main-sidenav>
+        </mat-sidenav>
+        <!-- / SIDENAV -->
+
+        <!-- CENTER -->
+        <div class="center">
+
+            <!-- CONTENT HEADER -->
+            <div class="header" fxLayout="row" fxLayoutAlign="start center">
+
+            </div>
+            <!-- / CONTENT HEADER -->
+
+            <!-- CONTENT CARD -->
+            <div class="content-card mat-white-bg" fxLayout="column" [ngClass]="{'current-todo-selected':currentTodo}">
+
+                <!-- CONTENT TOOLBAR -->
+                <div class="toolbar px-24 py-8" fxFlex fxLayout>
+
+                    <button mat-button class="mat-icon-button sidenav-toggle"
+                            fuseMatSidenavToggler="carded-left-sidenav"
+                            fxHide.gt-md>
+                        <mat-icon>menu</mat-icon>
+                    </button>
+
+                    <div class="full-width">
+                        <app-channel-toolbar
+                        [channelId]="channelId"
+                        [pageName]="'tasks'"
+                        ></app-channel-toolbar>
+                    </div>
+
+                </div>
+                <!-- / CONTENT TOOLBAR -->
+
+                <!-- CONTENT -->
+                <div class="content" fxFlex fxLayout="column">
+                    <div fxLayout="row" class="px-24 py-8">
+                        <div class="todo-selection" fxLayout="row" fxLayoutAlign="start center">
+                            <mat-checkbox (click)="toggleSelectAll()" [checked]="hasSelectedTodos"
+                                          [indeterminate]="isIndeterminate"></mat-checkbox>
+
+                            <button mat-icon-button [matMenuTriggerFor]="selectMenu">
+                                <mat-icon>arrow_drop_down</mat-icon>
+                            </button>
+                            <mat-menu #selectMenu="matMenu">
+                                <button mat-menu-item (click)="selectTodos()">All</button>
+                                <button mat-menu-item (click)="deselectTodos()">None</button>
+                                <button mat-menu-item (click)="selectTodos('read', true)">Read</button>
+                                <button mat-menu-item (click)="selectTodos('read', false)">Unread</button>
+                                <button mat-menu-item (click)="selectTodos('starred', true)">Starred</button>
+                                <button mat-menu-item (click)="selectTodos('starred', false)">Unstarred</button>
+                                <button mat-menu-item (click)="selectTodos('important', true)">Important</button>
+                                <button mat-menu-item (click)="selectTodos('important', false)">Unimportant</button>
+                            </mat-menu>
+
+                            <div class="toolbar-separator" *ngIf="hasSelectedTodos"></div>
+
+                            <button mat-icon-button [matMenuTriggerFor]="labelMenu" *ngIf="hasSelectedTodos">
+                                <mat-icon>label</mat-icon>
+                            </button>
+                            <mat-menu #labelMenu="matMenu">
+                                <button mat-menu-item *ngFor="let tag of tags" (click)="toggleTagOnSelectedTodos(tag.id)">
+                                    {{tag.title}}
+                                </button>
+                            </mat-menu>
+                        </div>
+
+                        <div class="search-wrapper mat-white-bg" fxFlex fxLayout="row" fxLayoutAlign="start center">
+                            <div class="search" fxLayout="row" fxLayoutAlign="start center">
+                                <mat-icon>search</mat-icon>
+                                <input [formControl]="searchInput" placeholder="Search for an todo" fxFlex>
+                            </div>
+                        </div>
+
+                        <div *ngIf="currentTodo" fxHide.gt-lg>
+                            <button mat-icon-button (click)="deSelectCurrentTodo()">
+                                <mat-icon>arrow_back</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="list-viewer-container">
+                        <fuse-todo-list fusePerfectScrollbar fxFlex
+                        [channelId]="channelId"
+                        ></fuse-todo-list>
+
+                        <fuse-todo-details fusePerfectScrollbar fxFlex></fuse-todo-details>
+                    </div>
+
+                </div>
+                <!-- / CONTENT -->
+
+            </div>
+            <!-- / CONTENT CARD -->
+
+        </div>
+        <!-- / CENTER -->
+
+    </mat-sidenav-container>
+
+</div>

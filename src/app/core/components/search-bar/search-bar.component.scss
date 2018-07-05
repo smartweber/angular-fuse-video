@@ -1,0 +1,85 @@
+@import "src/app/core/scss/fuse";
+
+:host {
+    display: flex;
+    width: 100%;
+
+    form {
+        height: 46px;
+        background: #eee;
+        border-radius: 5px;
+        padding-left: 1em;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    .fuse-search-bar {
+        min-width: 64px;
+        height: 64px;
+        font-size: 13px;
+
+        @include media-breakpoint-down('sm') {
+            height: 56px;
+        }
+
+        .wrap {
+            background: #eee !important;
+            border-radius: 5px;
+            margin: 1em;
+            padding: 0 1em;
+        }
+
+        .fuse-search-bar-expander,
+        .fuse-search-bar-collapser {
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .fuse-search-bar-loader {
+            width: 64px !important;
+            height: 64px !important;
+            line-height: 64px !important;
+            @include media-breakpoint-down('sm') {
+                height: 56px !important;
+                line-height: 56px !important;
+            }
+        }
+
+        .fuse-search-bar-collapser {
+            display: none;
+        }
+
+        #fuse-search-bar-input {
+            display: none;
+            min-height: 64px;
+            background-color: transparent;
+            font-size: 16px;
+        }
+
+        &.expanded {
+            #fuse-search-bar-input {
+                display: block;
+            }
+
+            .fuse-search-bar-collapser {
+                display: block;
+            }
+        }
+    }
+
+    body {
+
+        &.fuse-search-bar-expanded {
+
+            #toolbar {
+                z-index: 999 !important;
+            }
+        }
+    }
+
+    ::ng-deep .mat-input-underline {
+        display: none;
+    }
+}

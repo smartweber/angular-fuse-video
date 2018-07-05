@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  .chapter-item{
+    padding: 6px 0;
+    position: relative;
+
+    .handler {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 4px;
+    }
+  }
+
+  .resizable {
+    cursor: ew-resize;
+  }
+}

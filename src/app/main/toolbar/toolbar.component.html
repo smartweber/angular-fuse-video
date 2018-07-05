@@ -1,0 +1,185 @@
+<mat-toolbar class="p-0 mat-elevation-z1">
+
+    <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate"></mat-progress-bar>
+
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <!-- <button mat-button class="toggle-button-navbar mat-icon-button"
+                    fuseNavbarVertical="toggleBar" fxHide.gt-md>
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <div class="toolbar-separator" fxHide.gt-md></div> -->
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <a [routerLink]="'/pg/home'" class="logo ml-16">
+                    <img class="logo-icon" src="assets/images/logos/logo.png">
+                </a>
+            </div>
+
+        </div>
+
+        <div fxFlex="3 0 auto" fxLayout="row" fxLayoutAlign="start center">
+            <div class="mr-8" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+                <button mat-button [matMenuTriggerFor]="channelMenu" class="user-button">
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <mat-icon class="s-40 mr-4 primary-400-fg" fxHide.xs>apps</mat-icon>
+                        <div class="s-32 mr-4" fxHide fxShow.gt-sm>{{'TOOLBAR.SELECT_CHANNEL' | translate}}</div>
+                        <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                    </div>
+                </button>
+
+                <mat-menu #channelMenu="matMenu" [overlapTrigger]="false">
+                    <a *ngFor="let channel of channels;" mat-menu-item fxLayout="row" fxLayoutAlign="start center"
+                        [routerLink]="['/pg/channel', channel['id']]" class="link-menu-item">
+                        <span>{{ channel['data']['name'] }}</span>
+                    </a>
+
+                    <!-- <button mat-menu-item fxLayout="row" [matMenuTriggerFor]="developmentMenu" fxLayoutAlign="start center">
+                        <mat-icon class="mr-4">developer_mode</mat-icon>
+                        <span>Development</span>
+                    </button>
+
+                    <mat-menu #developmentMenu="matMenu" [overlapTrigger]="false">
+                        <a *ngFor="let channel of channels;" mat-menu-item fxLayout="row" fxLayoutAlign="start center"
+                        [routerLink]="['/pg/channel', channel['id']]">
+                            <span>{{ channel['data']['name'] }}</span>
+                        </a>
+                    </mat-menu> -->
+
+                </mat-menu>
+            </div>
+
+            <div fxFlex="6 0 auto" fxLayout="row" fxLayoutAlign="start center">
+                <fuse-search-bar (onInput)="search($event)"></fuse-search-bar>
+            </div>
+
+            <div fxFlex="2 1 auto" fxLayout="row" fxLayoutAlign="space-around center">
+                <button mat-button class="mat-primary-500-bg">{{'TOOLBAR.ADD_CONTENT' | translate}}</button>
+
+                <button mat-button [matMenuTriggerFor]="addChannelMenu" class="user-button">
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <mat-icon class="s-40 add-channel" fxHide.xs >add_circle</mat-icon>
+                    </div>
+                </button>
+                <mat-menu #addChannelMenu="matMenu" [overlapTrigger]="false">
+
+                    <button mat-menu-item>
+                        Add new channel
+                    </button>
+
+                    <button mat-menu-item>
+                        Add new track
+                    </button>
+
+                    <button mat-menu-item (click)="addNewVideo($event)">
+                        Add new video
+                    </button>
+
+                    <button mat-menu-item>
+                        Add new user
+                    </button>
+
+                </mat-menu>
+            </div>            
+        </div>        
+
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-button [matMenuTriggerFor]="helpIconMenu" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-icon class="s-40 link-class" xHide.xs >help</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #helpIconMenu="matMenu" [overlapTrigger]="false">
+                <div class="help-content">{{'TOOLBAR.HELP_CONTENT' | translate}}</div>
+            </mat-menu>
+
+            <button mat-button class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center" class="train">
+                    <div class="counter">25</div>
+                    <mat-icon class="s-40 link-class" xHide.xs>lightbulb_outline</mat-icon>
+                </div>
+            </button>
+
+            <button mat-button [matMenuTriggerFor]="notificationsMenu" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center" class="notification">
+                    <div class="counter">3</div>
+                    <mat-icon class="s-28 link-class" xHide.xs>notifications</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #notificationsMenu="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item>
+                    Notification1
+                </button>
+
+                <button mat-menu-item>
+                    Notification2
+                </button>
+
+                <button mat-menu-item>
+                    Notification3
+                </button>
+
+                <button mat-menu-item>
+                    Notification4
+                </button>
+
+            </mat-menu>
+
+            <button mat-button [matMenuTriggerFor]="userMenu"
+                    class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar" src="assets/images/avatars/profile.jpg">
+                    <span class="username mr-12" fxHide fxShow.gt-sm>{{'TOOLBAR.MY_TUBE' | translate}}</span>
+                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item>
+                    <mat-icon>account_circle</mat-icon>
+                    <span>{{'TOOLBAR.MY_PROFILE' | translate}}</span>
+                </button>
+
+                <button mat-menu-item class="">
+                    <mat-icon>mail</mat-icon>
+                    <span>{{'TOOLBAR.INBOX' | translate}}</span>
+                </button>
+
+                <button mat-menu-item class="" (click)="logOut()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>{{'TOOLBAR.LOGOUT' | translate}}</span>
+                </button>
+
+            </mat-menu>
+
+            <div class="toolbar-separator"></div>
+
+            <button mat-button fxHide fxShow.gt-xs
+                    class="language-button"
+                    [matMenuTriggerFor]="languageMenu">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="flag mr-8" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
+                    <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
+                </div>
+            </button>
+
+            <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang)">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <img class="flag mr-16" [src]="'assets/images/flags/'+lang.flag+'.png'">
+                        <span class="iso">{{lang.title}}</span>
+                    </div>
+                </button>
+
+            </mat-menu>
+        </div>
+    </div>
+</mat-toolbar>

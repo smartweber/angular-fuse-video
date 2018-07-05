@@ -1,0 +1,17 @@
+<h1 matDialogTitle *ngIf="type==='success'" class="alert-title success">
+  <mat-icon class="s-32">check_circle</mat-icon>Success
+</h1>
+
+<h1 matDialogTitle *ngIf="type==='info'" class="alert-title info">
+  <mat-icon class="s-32">info</mat-icon>Alert
+</h1>
+
+<h1 matDialogTitle *ngIf="type==='error'" class="alert-title error">
+  <mat-icon class="s-32">error</mat-icon>Error
+</h1>
+<div mat-dialog-content>
+  <div [innerHTML]="comment"></div>
+</div>
+<div mat-dialog-actions align="end" class="pt-24">
+    <button mat-raised-button class="mat-accent mr-16" (click)="dialogRef.close()">OK</button>
+</div>

@@ -1,0 +1,52 @@
+<div id="text_area" class="page-layout simple fullwidth" fxLayout="row" fxLayoutAlign="start">
+  
+  <form class="mat-white-bg mat-elevation-z4 p-24" fxFlex="50" fxLayout="column" fxLayoutAlign="start" [formGroup]="form">
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+      <mat-form-field fxFlex="100">
+        <input matInput placeholder="Title" formControlName="name" required>
+        <mat-error *ngIf="formErrors.name.required">
+          Name is required!
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" fxLayoutWrap>
+
+      <mat-form-field fxFlex="100">
+        <textarea matInput placeholder="Abstact" formControlName="abstact"></textarea>
+        <mat-error *ngIf="formErrors.abstact.required">
+          Abstact is required!
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+      <mat-form-field fxFlex="100">
+        <mat-select placeholder="Status" formControlName="status" required>
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formErrors.status.required">
+          Status is required!
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+      <mat-form-field fxFlex="100">
+        <input type="number" matInput placeholder="Version" formControlName="version">
+      </mat-form-field>
+
+    </div>
+    
+  </form>
+
+</div>

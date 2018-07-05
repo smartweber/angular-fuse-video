@@ -1,0 +1,270 @@
+<div class="add-video-dialog-container">
+  <div mat-dialog-content>
+    <div class="page-layout carded left-sidenav tabbed single-scroll" fusePerfectScrollbar>
+      <!-- TOP BACKGROUND -->
+      <div class="top-bg channel-top-bg" [style.background-image]="'url('+ '../../assets/images/backgrounds/channel-bg.png'+')'">
+        <div class="overlay-bg" fxFill fxLayout fxLayoutAlign="start stretch">
+          <div fxLayout="row" fxLayoutAlign="space-between start" class="channel-info m-20">
+            <div fxLayout="row" class="full-width" fxLayoutAlign="space-between start">
+              <div fxLayout="row">
+                <div class="track-logo">
+                  <img src="../../../assets/images/logos/channel-logo.png" alt="Logo">                  
+                </div>
+
+                <div class="channel-text ml-12 white-fg">
+                  <h2 class="my-12">
+                    <strong>Upload New Video</strong>
+                  </h2>
+                  <div class="description">
+                    <h4 class="my-0">This guide will help you upload a new video in a channel</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / TOP BACKGROUND -->
+
+      <mat-sidenav-container>
+
+        <!-- SIDENAV -->
+        <mat-sidenav class="sidenav" align="start" opened="true" mode="side" fuseMatSidenavHelper="academy-left-sidenav" mat-is-locked-open="gt-md">
+          <!-- SIDENAV HEADER -->
+          <div class="header p-24" ngClass="mat-accent-bg" ngClass.gt-md="white-fg">
+              <!-- <h2>Sidenav header</h2> -->
+          </div>
+          <!-- / SIDENAV HEADER -->
+
+          <div class="sidenav-content" fusePerfectScrollbar>
+
+            <div class="steps">
+
+              <div class="step"
+                   *ngFor="let step of steps; let i = index; let last = last; let first = first"
+                   (click)="gotoStep(i)"
+                   [ngClass]="{'current': currentStep === i, 'completed': currentStep > i, 'last': last, 'first': first}">
+                <div class="index">
+                  <span>{{ i + 1 }}</span>
+                </div>
+                <div class="title">{{ step.title }}</div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </mat-sidenav>
+        <!-- / SIDENAV -->
+
+        <!-- CENTER -->
+        <div class="center">
+          <!-- CONTENT HEADER -->
+          <div class="header white-fg pt-24 pb-24">
+
+          </div>
+          <!-- / CONTENT HEADER -->
+
+          <!-- CONTENT CARD -->
+          <div class="content-card mat-white-bg">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar px-24">
+              <div class="step-navigation p-8" fxLayout="row" fxLayoutAlign="start center">
+
+                <div fxFlex="1 0 auto">
+                  <button mat-button class="previous mat-accent"
+                          (click)="gotoPreviousStep()"
+                          [disabled]="currentStep === 0"
+                          [fxHide]="currentStep === 0 || currentStep === totalSteps">
+                    Previous
+                  </button>
+                </div>
+
+                <div fxFlex="1 0 auto" fxLayoutAlign="center center">
+                  <button mat-button class="edit mat-accent"
+                          (click)="hideHelp()"
+                          [fxHide]="currentStep === totalSteps || isEditForm">
+                    Hide help
+                  </button>
+
+                  <button mat-button class="edit mat-accent"
+                          (click)="showHelp()"
+                          [fxHide]="currentStep === totalSteps || !isEditForm">
+                    Show help
+                  </button>
+                </div>
+
+                <div fxFlex="1 0 auto">
+                  <button mat-button class="next mat-accent"
+                          (click)="gotoNextStep()"
+                          [disabled]="currentStep === totalSteps || !isNextPage"
+                          [fxHide]="currentStep === totalSteps">
+                    Next
+                  </button>
+                </div>
+
+              </div>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <div id="course-content" class="content">
+
+              <ng-container *ngFor="let step of steps; let i = index;">
+
+                <div class="course-step" fusePerfectScrollbar
+                     *ngIf="currentStep === i"
+                     [@slideIn]="animationDirection">
+
+                  <ng-container *ngIf="currentStep === totalSteps;else step_content">
+                    
+                    <div fxLayout="column" fxFill fxLayout="column" fxLayoutAlign="space-around center">
+                      <h1><strong>Great Job!</strong></h1>
+
+                      <div class="my-16">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem diam, pulvinar id nisl non, ultrices maximus nibh. Suspendisse ut justo velit. Nullam ac ultrices risus, quis auctor orci. Vestibulum volutpat nisi et neque porta ullamcorper. Maecenas porttitor porta erat ac suscipit. Sed cursus leo ut elementum fringilla.
+                      </div>
+
+                      <div class="my-16">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce lorem diam, pulvinar id nisl non, ultrices maximus nibh. Suspendisse ut justo velit.
+                      </div>
+
+                      <div class="full-width" fxLayout fxLayoutAlign="space-around center">
+                        <button mat-raised-button color="accent" (click)="onRestart()">Restart</button>
+                        <button mat-raised-button color="accent" (click)="onCloseDialog()">Close</button>
+                      </div>
+                    </div>
+
+                  </ng-container>
+
+                  <ng-template #step_content>
+                    <div *ngIf="!isEditForm" fxFill fxLayout="column" >
+                      <div class="video-container mb-32" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start start">
+                        
+                        <div fxFlex="100" fxFlex.gt-sm="66.66">
+                          <div class="video-wrapper">
+                            <div class="video-player-wrapper">
+                              <vg-player>
+                                <vg-overlay-play></vg-overlay-play>
+                                <vg-buffering></vg-buffering>
+
+                                <vg-scrub-bar>
+                                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                                </vg-scrub-bar>
+
+                                <vg-controls [vgAutohide]="true" [vgAutohideTime]="1.5">
+                                  <vg-play-pause></vg-play-pause>
+                                  <vg-playback-button></vg-playback-button>
+
+                                  <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                                  <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+                                  <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+                                  <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                                  <vg-track-selector></vg-track-selector>
+                                  <vg-mute></vg-mute>
+                                  <!-- <vg-volume></vg-volume> -->
+
+                                  <!-- <vg-fullscreen></vg-fullscreen> -->
+                                </vg-controls>
+
+                                <video [vgMedia]="media" #media id="singleVideo" preload="auto" vg-responsive="true">
+                                  <source [src]="currentVideoUrl" type="video/mp4">
+                                </video>
+                              </vg-player>
+                            </div>
+
+                            <div class="video-title p-16 font-size-20 full-width">
+                              {{ step.data.title }}
+                            </div>
+                          </div>
+
+                          <div class="tag-wrap mt-8 font-size-10">
+                            ID: KBISUSFDJEKEREUEW | Publisher: LaunchPeople | Published: 1.1.2017 | Received 1.1.2018
+                          </div>
+                        </div>
+
+                        <div fxFlex="100" fxFlex.gt-sm="33.34" class="p-16">
+                          <div class="abstract-wrapper mb-20">
+                            <div class="mat-subheading-2">
+                              Abstract
+                            </div>
+
+                            <div [innerHTML]="step.data.abstract | displayAsTextarea"></div>
+                          </div>
+
+                          <div class="guide-area">
+                            <div class="mat-subheading-2">
+                              Download Quick Guide
+                            </div>
+
+                            <div class="">
+                              How to xyz something
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div [innerHTML]="step.data.description | displayAsTextarea"></div>
+                    </div>
+
+                    <div *ngIf="isEditForm" fxFlex>
+
+                      <form [formGroup]="addForm" *ngIf="isLoadPage" fxFlex fxLayout="column" fxLayoutAlign="space-around center">
+
+                        <mat-form-field class="full-width">
+                          <input matInput type="text" placeholder="Title" formControlName="title">
+                          <mat-error *ngIf="addFormErrors.title.required">
+                            Title is required
+                          </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                          <textarea matInput rows="2" placeholder="Abstract" formControlName="abstract"></textarea>
+                          <mat-error *ngIf="addFormErrors.abstract.required">
+                            Abstract is required
+                          </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                          <textarea matInput rows="4" placeholder="Description" formControlName="description"></textarea>
+                          <mat-error *ngIf="addFormErrors.description.required">
+                            Description is required
+                          </mat-error>
+                        </mat-form-field>
+
+                        <!-- <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
+                                [disabled]="loginForm.invalid">
+                            LOGIN
+                        </button> -->
+
+                      </form>
+
+                    </div>
+
+                  </ng-template>
+
+                </div>
+
+              </ng-container>
+
+            </div>
+            <!-- / CONTENT -->
+
+          </div>
+          <!-- / CONTENT CARD -->
+
+        </div>
+        <!-- / CENTER -->
+
+      </mat-sidenav-container>
+
+    </div>
+
+  </div>
+</div>

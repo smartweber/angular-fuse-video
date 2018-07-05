@@ -1,0 +1,35 @@
+<div class="manuscript-area responsive-table">
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th style="width: 20%">Chapter</th>
+        <th style="width: 40%">Transcript</th>
+        <th style="width: 40%">Manuscript</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let chapter of chapters; let i = index;" (click)="onSelectChapter(i)" [ngClass]="{'mat-primary-A100-bg': i === selectedChapter}">
+        <td>
+          {{i + 1}}
+        </td>
+        <td>
+          <app-editable-content
+            [type]="'textarea'"
+            [inputValue]="chapter['transcript']"
+            (changeInputValue)="onChangeTranscript(i, $event)"
+          ></app-editable-content>
+        </td>
+        <td>
+          <app-editable-content
+            [type]="'textarea'"
+            [inputValue]="chapter['manuscript']"
+            (changeInputValue)="onChangeManuscript(i, $event)"
+          ></app-editable-content>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

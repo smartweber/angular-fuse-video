@@ -1,0 +1,256 @@
+@import "src/app/core/scss/fuse";
+
+:host {
+  .page-layout {
+    .top-bg {
+      height: 150px;
+
+      .track-logo {
+        img {
+          max-width: 100px; 
+        }
+      }
+    }
+  }
+
+  .overlay-bg {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .mat-drawer-container {
+    min-height: 540px;
+    min-width: 960px;
+  }
+
+  .full-height {
+    height: 100%;
+  }
+
+  .video-container {
+    .mat-subheading-2 {
+      border-bottom: 1px solid mat-color($mat-grey, 300);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+
+      .video-player-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      .video-title {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        color: #fff;
+      }
+    }
+  }
+
+  .sidenav {
+    height: 100%;
+
+    .header {
+      height: 150px !important;
+      min-height: 150px !important;
+      max-height: 150px !important;
+    }
+
+    .steps {
+      padding: 16px;
+
+      .step {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 16px;
+        cursor: pointer;
+        color: rgba(0, 0, 0, 0.54);
+
+        &.current {
+          color: #fff;
+          background: mat-color($mat-purple, 400);
+
+          .index {
+
+            span {
+              border: 2px solid mat-color($mat-purple, 500);
+              background: #fff;
+              color: rgba(0, 0, 0, 0.87);
+            }
+          }
+        }
+
+        &.completed {
+          color: rgba(0, 0, 0, 0.87);
+
+          .index {
+
+            span {
+              border: 2px solid mat-color($mat-purple, 500);
+              background: mat-color($mat-purple, 500);
+              color: #fff;
+            }
+
+            &:after {
+              // border-left-color: mat-color($mat-purple, 500);
+            }
+          }
+
+          + .step {
+
+            .index {
+
+              &:before {
+                border-left-color: mat-color($mat-purple, 500);
+              }
+            }
+          }
+        }
+
+        &.first {
+
+          .index {
+
+            &:before {
+              display: none;
+            }
+          }
+        }
+
+        &.last {
+
+          .index {
+
+            &:after {
+              display: none;
+            }
+          }
+        }
+
+        .index {
+          display: flex;
+          margin-right: 12px;
+
+          span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 28px;
+            min-width: 28px;
+            max-width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 100%;
+            border: 2px solid mat-color($mat-purple, 500);
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 10;
+          }
+
+          &:before,
+          &:after {
+            position: absolute;
+            display: block;
+            content: ' ';
+            border-left: 1px solid mat-color($mat-purple, 500);
+            width: 1px;
+            height: 50%;
+            left: 29px;
+            z-index: 8;
+          }
+
+          &:before {
+            top: 0;
+          }
+
+          &:after {
+            bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .center {
+    position: relative;
+    height: 540px;
+
+    .header {
+      height: 100px !important;
+      min-height: 100px !important;
+      max-height: 100px !important;
+    }
+
+    .content-card {
+      .toolbar {
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+      }
+    }
+
+    .content {
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      // background: mat-color($mat-grey, 200);
+
+      .course-step {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 48px;
+        overflow: auto;
+
+        @media (max-width: 720px) {
+          padding: 0 0 120px 0;
+        }
+
+        .course-step-content {
+          padding: 24px;
+          max-width: 720px;
+          margin: 0 auto;
+          width: 100%;
+          background: white;
+          @include mat-elevation(4);
+        }
+      }
+    }
+
+    .step-navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      .previous {
+        margin-right: auto;
+      }
+
+      .next {
+        margin-left: auto;
+      }
+
+      button {
+        color: #000;
+      }
+
+      button[disabled] {
+        color: rgba(0, 0, 0, 0.26);
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="main-content" fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start start">
+  <div class="content-block" fxFlex="100" fxFlex.gt-sm="50" fxLayout="row" fxLayoutAlign="start center">
+    <custom-video-player-card
+      [type]="'player'"
+      [videoUrl]="currentVideoUrl"
+      [title]="'Lorem ipsum dolor sit'"
+      [description]="'Cards are a convenient means of displaying content composed of different elements.'"
+    ></custom-video-player-card>
+  </div>
+
+  <div class="content-block px-16" fxFlex="100" fxFlex.gt-sm="50" fxLayout="column" fxLayoutAlign="start center">
+    <div class="welcome" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start start">
+      <div class="mat-display-1 mb-16">
+        Welcome information
+      </div>
+
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue lacinia risus, sodales egestas est cursus sit amet. Suspendisse hendrerit varius ligula, a scelerisque tortor dapibus in. Cras imperdiet ligula ac est mollis, in pretium erat maximus. Suspendisse lobortis massa ac turpis scelerisque, vitae accumsan diam posuere.
+      </div>
+    </div>
+
+    <div class="importants mt-16" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="space-between start">
+      <div class="mat-headline">Important Videos</div>
+
+      <div fxLayout="column">
+        <div fxLayout="column" fxLayout.gt-sm="row">
+          <div class="card-area font-size-10" *ngFor="let important of importants" fxFlex="100" fxFlex.gt-sm="33.33" fxLayout="column" fxLayoutAlign="start start">
+
+            <app-video-thumbnail-card
+              [videoLink]="videoLink"
+              [description]="'Cards are a convenient means of displaying content composed of different elements.'"
+            ></app-video-thumbnail-card>
+
+          </div>
+        </div>
+
+        <div fxLayout="column" fxLayout.gt-sm="row">
+          <div class="card-area font-size-10" *ngFor="let important of importants" fxFlex="100" fxFlex.gt-sm="33.33" fxLayout="column" fxLayoutAlign="start start">
+
+            <app-video-thumbnail-card
+              [videoLink]="videoLink"
+              [description]="'Cards are a convenient means of displaying content composed of different elements.'"
+            ></app-video-thumbnail-card>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

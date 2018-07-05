@@ -1,0 +1,17 @@
+<div class="video-list" fxLayout="column" fxLayout.gt-sm="row wrap" *ngIf="!isInprogress;else progressEl">
+  <div fxFlex="100"  fxFlex.gt-sm="20" fxLayout fxLayoutAlign="center" *ngFor="let video of videos" class="video-item">
+    <custom-video-player-card
+      [type]="'thumbnail'"
+      [thumbnailUrl]="video['data']['thumbnail']"
+      [thumbnailTitle]="video['data']['title']"
+      [videoUrl]="video['data']['videoSrc']"
+      [description]="video['data']['abstract']"
+    ></custom-video-player-card>
+  </div>
+</div>
+
+<ng-template #progressEl>
+  <div class="m-8" fxLayoutAlign="center">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+</ng-template>

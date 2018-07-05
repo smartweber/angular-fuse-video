@@ -1,0 +1,113 @@
+@import 'src/app/core/scss/fuse';
+
+:host {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 4;
+
+    &.below {
+        z-index: 2;
+    }
+
+    .mat-toolbar {
+        background: inherit;
+        color: inherit;
+        position: relative;
+
+        .loading-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        .logo-icon {
+            height: 100%;
+            max-width: 150px;
+        }
+    }
+
+    .user-button,
+    fuse-search-bar,
+    .language-button,
+    .quick-panel-toggle-button {
+        min-width: 64px;
+        height: 64px;
+
+        @include media-breakpoint-down('xs') {
+            height: 56px;
+        }
+    }
+
+    .toggle-button-navbar {
+        min-width: 56px;
+        height: 56px;
+    }
+
+    .toolbar-separator {
+        height: 64px;
+        width: 1px;
+        background: rgba(0, 0, 0, .12);
+
+        @include media-breakpoint-down('xs') {
+            height: 56px;
+        }
+    }
+
+    .add-channel {
+        color: mat-color($accent);
+        cursor: pointer;
+    }
+
+    button {
+        &.image {
+           background-color: transparent;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center; 
+        }
+    }
+
+    .notification {
+        position: relative;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.54);
+        padding: 2px;
+
+        .mat-icon {
+            color: #fff;
+        }
+
+        .counter {
+            position: absolute;
+            top: -20px;
+            right: -5px;
+        }
+    }
+
+    .train {
+        .counter {
+            position: absolute;
+            top: 10px;
+            font-size: 10px;
+        }
+    }
+
+    .avatar {
+        border: 2px solid rgba(0, 0, 0, 0.54);
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+}
+
+.help-content {
+    margin: 1em;
+}

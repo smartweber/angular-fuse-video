@@ -1,0 +1,140 @@
+@import "src/app/core/scss/fuse";
+$top-bg-image: url('../../../../../../assets/images/backgrounds/channel-bg.png');
+
+:host {
+    width: 100%;
+    height: 100%;
+
+    .page-layout {
+        height: 100%;
+    }
+
+    .bread-scrumb-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        width: 100%; 
+    }
+
+    .follow-action {
+        color: #000;
+        margin-top: 20px;
+    }
+
+    .channel-top-bg {
+        background-image: $top-bg-image !important;
+
+        .overlay-bg {
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .channel-info {
+            width: 100%;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .channel-logo {
+            background: url('../../../../../../assets/images/logos/channel-logo.png') no-repeat;
+            background-size: cover;
+            width: 120px;
+            height: 120px;
+        }
+
+        .channel-text {
+            h1 {
+                margin: 10px 0 0;
+            }
+
+            .description {
+                h3 {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    .center {
+
+        .header {
+        }
+
+        .content-card {
+            .list-viewer-container {
+                display: flex;
+                flex: 1 1 0.000000001px;
+            }
+
+            .search-wrapper {
+                @include mat-elevation(7);
+                box-shadow: none;
+                border: 1px solid rgba(0, 0, 0, .12);
+
+                .sidenav-toggle {
+                    margin: 0;
+                    width: 56px;
+                    height: 56px;
+                    background: #FFF;
+                    border-radius: 0;
+                    border-right: 1px solid rgba(0, 0, 0, .12);
+                }
+
+                .search {
+                    width: 100%;
+                    height: 56px;
+                    line-height: 56px;
+                    padding: 18px;
+
+                    input {
+                        height: 56px;
+                        padding-left: 16px;
+                        color: rgba(0, 0, 0, 0.54);
+                        border: none;
+                        outline: none;
+                    }
+                }
+            }
+
+            @include media-breakpoint(xs) {
+
+                fuse-mail-list {
+                    border-right: none;
+                }
+
+                fuse-mail-list,
+                fuse-mail-details {
+                    flex: 1 0 100%;
+                }
+
+                fuse-mail-details {
+                    display: none !important;
+                }
+
+                &.current-mail-selected {
+
+                    .toolbar {
+                        padding-left: 16px !important;
+
+                        .mail-selection {
+                            display: none !important;
+                        }
+                    }
+
+                    .content {
+
+                        fuse-mail-list {
+                            display: none !important;
+                        }
+
+                        fuse-mail-details {
+                            display: flex !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

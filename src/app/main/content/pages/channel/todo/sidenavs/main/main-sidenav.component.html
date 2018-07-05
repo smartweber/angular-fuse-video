@@ -1,0 +1,51 @@
+<!-- SIDENAV HEADER -->
+<div fxLayout="column" fxLayoutAlign="space-between start"
+     class="header p-24 pb-4" ngClass="mat-accent-bg" ngClass.gt-md="white-fg">
+    
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<!-- SIDENAV CONTENT -->
+<div class="content" fusePerfectScrollbar *fuseIfOnDom [@animate]="{value:'*',params:{y:'50px'}}">
+
+    <div class="p-24">
+        <button mat-raised-button fxFlex
+                class="mat-accent add-todo-button"
+                (click)="newTodo()"
+                aria-label="ADD TASK">
+            ADD TASK
+        </button>
+    </div>
+
+    <div class="nav">
+
+        <div class="nav-item">
+            <a class="nav-link" matRipple [routerLink]="'/pg/channel/' + channelId + '/todo/all'" routerLinkActive="active">
+                <mat-icon class="nav-link-icon">view_headline</mat-icon>
+                <span>All</span>
+            </a>
+        </div>
+
+        <div class="nav-subheader">FILTERS</div>
+
+        <div class="nav-item" *ngFor="let filter of filters">
+            <a class="nav-link" matRipple [routerLink]="'/pg/channel/' + channelId + '/todo/filter/' + filter.handle" routerLinkActive="active">
+                <mat-icon class="nav-link-icon" *ngIf="filter.icon">{{filter.icon}}</mat-icon>
+                <span>{{filter.title}}</span>
+            </a>
+        </div>
+
+        <div class="nav-subheader">TAGS</div>
+
+        <div class="nav-item" *ngFor="let tag of tags">
+            <a class="nav-link" matRipple [routerLink]="'/pg/channel/' + channelId + '/todo/tag/' + tag.handle" routerLinkActive="active">
+                <mat-icon class="nav-link-icon" [ngStyle]="{'color':tag.color}">label</mat-icon>
+                <span>{{tag.title}}</span>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+<!-- / SIDENAV CONTENT -->

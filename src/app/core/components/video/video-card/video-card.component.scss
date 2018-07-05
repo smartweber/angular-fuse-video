@@ -1,0 +1,10 @@
+@import "src/app/core/scss/fuse";
+
+.video-card {
+  .fuse-card {
+    min-width: 150px;
+    max-width: 400px;
+    margin-bottom: 1em;
+    width: 90%;
+  }
+}

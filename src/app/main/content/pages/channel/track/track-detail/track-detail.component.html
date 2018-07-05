@@ -1,0 +1,80 @@
+<div fxLayout="column" fxLayoutAlign *ngIf="isLoadPage">
+
+  <div class="title-area px-16"><!-- title area -->
+    <div class="mat-display-1 mb-16">
+      {{ videoTitle }}
+    </div>
+
+    <div>
+      {{ videoAbstract }}
+    </div>
+  </div><!-- title area -->
+
+  <div class="post-area mt-16" fxLayout="row" fxLayoutAlign><!-- post area -->
+    <div fxFlex="100" fxFlex.gt-sm="50" class="p-8">
+      <custom-video-player-card
+        [type]="'player'"
+        [videoUrl]="videoLink"
+        [description]="'Cards are a convenient means of displaying content composed of different elements.'"
+      ></custom-video-player-card>
+    </div>
+
+    <div fxFlex="100" fxFlex.gt-sm="50" class="p-16">
+      <div class="description mb-20"><!-- description -->
+        <div class="mat-title mb-0">Description:</div>
+
+        <div class="content">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue lacinia risus, sodales egestas est cursus sit amet. Suspendisse hendrerit varius ligula, a scelerisque tortor dapibus in. Cras imperdiet ligula ac est mollis, in pretium erat maximus. Suspendisse lobortis massa ac turpis scelerisque, vitae accumsan diam posuere.
+        </div>
+      </div><!-- description -->
+
+      <div class="other-tracks mb-20"><!-- other tracks -->
+        <div class="mat-title mb-0">
+          Other tracks:
+        </div>
+
+        <div class="content">
+          <ul>
+            <li>Hyperlink to the video in other track</li>
+            <li>Hyperlink to the video in other track</li>
+            <li>Hyperlink to the video in other track</li>
+          </ul>
+        </div>
+      </div><!-- other tracks -->
+
+      <div class="quick-guide mb-20"><!-- quick guide -->
+        <div class="mat-title mb-0">
+          Quick guide:
+        </div>
+
+        <div class="content">
+          <ul>
+            <li *ngIf="quickGuideLink">
+              <a [href]="quickGuideLink" target="_blank">{{ videoTitle }}</a>
+            </li>
+          </ul>
+        </div>
+      </div><!-- quick guide -->
+
+      <div class="downloadable-files"><!-- downloadable files -->
+        <div class="mat-title mb-0">
+          Downloadable files:
+        </div>
+
+        <div class="content">
+          <ul>
+            <li>Hyperlink to a file I can download</li>
+            <li>Hyperlink to a file I can download</li>
+          </ul>
+        </div>
+      </div><!-- downloadable files -->
+    </div>
+  </div><!-- post area -->
+
+  <div class="comment-area mb-8" fxLayout="row" fxLayoutAlign>
+    <div fxFlex="100" fxFlex.gt-sm="50">
+      <app-timeline></app-timeline>
+    </div>
+  </div>
+
+</div>

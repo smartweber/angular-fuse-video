@@ -1,0 +1,58 @@
+<ng-template #mentionListTemplate let-item="item">
+  <img [src]="item.avatar" class="avatar" alt="{{item.name}}"/>
+
+  <div fxLayout="column">
+      <div>
+          <span class="username">{{item.name}}</span>
+          <span class="message"> {{item.message}}</span>
+      </div>
+      <span class="time secondary-text">{{item.time}}</span>
+  </div>
+</ng-template>
+
+<div class="feed-post-area" *ngIf="!isRoot">
+  <div class="position-relative">
+
+    <button class="image-button" mat-icon-button aria-label="Mention somebody" matTooltip="Images">
+      <mat-icon>photo_camera</mat-icon>
+    </button>
+
+    <textarea [mention]="complexItems" placeholder="Add a comment..." 
+      [mentionConfig]="{triggerChar:'@',labelKey:'name',mentionSelect:format}"
+      [mentionListTemplate]="mentionListTemplate"
+      (inputValue)='getValue($event)'></textarea>
+    
+  </div>
+  
+  <button mat-raised-button color="accent" class="post-comment-button" aria-label="Post Comment" *ngIf="isShowPostBtn">
+    Post
+  </button>
+</div>
+
+<div class="feed-post-area" *ngIf="isRoot">
+  <textarea class="root-post" [mention]="complexItems" placeholder="Post a comment..." 
+  [mentionConfig]="{triggerChar:'@',labelKey:'name',mentionSelect:format}"
+  [mentionListTemplate]="mentionListTemplate"
+  (inputValue)='getValue($event)'></textarea>
+
+  <div class="action-area" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <div fxLayout="row" fxLayoutAlign="start center">
+
+      <button mat-button aria-label="Write an article" matTooltip="Write an article">
+        <mat-icon>open_in_new</mat-icon> Write an article
+      </button>
+
+      <button mat-button aria-label="Add Photo" matTooltip="Add Photo">
+        <mat-icon>photo_camera</mat-icon> Images
+      </button>
+
+    </div>
+
+    <button mat-raised-button color="accent" class="post-comment-button" aria-label="Post Comment" *ngIf="isShowPostBtn">
+      Post
+    </button>
+
+  </div>
+</div>
+

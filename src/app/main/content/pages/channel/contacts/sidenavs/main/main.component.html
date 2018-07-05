@@ -1,0 +1,67 @@
+<!-- SIDENAV HEADER -->
+<div fxLayout="column" fxLayoutAlign="space-between start"
+     class="header p-24 pb-4" ngClass="mat-accent-bg" ngClass.gt-md="white-fg">
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<!-- SIDENAV CONTENT -->
+<div class="content" fusePerfectScrollbar *fuseIfOnDom [@animate]="{value:'*',params:{y:'50px'}}">
+
+    <div class="nav">
+        <div class="nav-item">
+            <a class="nav-link" matRipple (click)="changeFilter('all')" [ngClass]="{'active':filterBy ==='all'}">
+                <mat-icon class="nav-link-icon">view_headline</mat-icon>
+                <span>All</span>
+            </a>
+        </div>
+
+        <div class="nav-subheader">Status</div>
+
+        <div class="nav-item" aria-label="inbox">
+            <a class="nav-link" matRipple (click)="changeFilter('status_frequent')" [ngClass]="{'active':filterBy ==='status_frequent'}">
+                <mat-checkbox class="font-size-14">Frequently contacted (29)</mat-checkbox>
+            </a>
+
+            <a class="nav-link" matRipple (click)="changeFilter('status_star')" [ngClass]="{'active':filterBy ==='status_star'}">
+                <mat-checkbox class="font-size-14">Starred contacts (432)</mat-checkbox>
+            </a>
+        </div>
+
+        <div class="nav-subheader">Status</div>
+
+        <div class="nav-item">
+            <a class="nav-link" matRipple (click)="changeFilter('status_active')" [ngClass]="{'active':filterBy ==='status_active'}">
+                <mat-checkbox class="font-size-14">Activated (29)</mat-checkbox>
+            </a>
+
+            <a class="nav-link" matRipple (click)="changeFilter('status_deactive')" [ngClass]="{'active':filterBy ==='status_deactive'}">
+                <mat-checkbox class="font-size-14">Deactivated (432)</mat-checkbox>
+            </a>
+        </div>
+
+        <div class="nav-subheader">Role</div>
+
+        <div class="nav-item">
+            <a class="nav-link" matRipple (click)="changeFilter('role_channel_owner')" [ngClass]="{'active':filterBy ==='role_channel_owner'}">
+                <mat-checkbox class="font-size-14">Channel Owner (29)</mat-checkbox>
+            </a>
+
+            <a class="nav-link" matRipple (click)="changeFilter('role_manager')" [ngClass]="{'active':filterBy ==='role_manager'}">
+                <mat-checkbox class="font-size-14">Content Manager (432)</mat-checkbox>
+            </a>
+
+            <a class="nav-link" matRipple (click)="changeFilter('role_contibutor')" [ngClass]="{'active':filterBy ==='role_contibutor'}">
+                <mat-checkbox class="font-size-14">Contributor (321)</mat-checkbox>
+            </a>
+
+            <a class="nav-link" matRipple (click)="changeFilter('role_owner')" [ngClass]="{'active':filterBy ==='role_owner'}">
+                <mat-checkbox class="font-size-14">Owner (746)</mat-checkbox>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+<!-- / SIDENAV CONTENT -->
+

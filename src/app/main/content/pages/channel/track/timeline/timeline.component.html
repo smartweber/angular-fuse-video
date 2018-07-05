@@ -1,0 +1,146 @@
+<div id="timeline" class="p-16" fxLayout="row" fxLayoutWrap>
+
+    <div class="timeline-content" fxLayout="column">
+
+        <div class="profile-box add-post">
+
+            <div class="form" fxFlex>
+
+                <app-feed-post-area fxFlex [isRoot]="true"></app-feed-post-area>
+
+            </div>
+
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="timeline-item" *ngFor="let post of timeline.posts">
+
+            <header fxLayout="row" fxLayoutAlign="space-between start">
+                <div class="user" fxLayout="row" fxLayoutAlign="start center">
+                    <img class="avatar" [src]="post.user.avatar">
+
+                    <div fxLayout="column">
+                        <div class="title">
+                            <span class="username">{{post.user.name}}</span>
+                            <span *ngIf="post.type === 'post'">posted on your timeline</span>
+                            <span *ngIf="post.type === 'something'">shared something with you</span>
+                            <span *ngIf="post.type === 'video'">shared a video with you</span>
+                            <span *ngIf="post.type === 'article'">shared an article with you</span>
+                        </div>
+                        <div class="time">{{post.time}}</div>
+                    </div>
+                </div>
+
+                <button mat-icon-button aria-label="More">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </header>
+
+            <div class="content" fxLayout="column">
+                <div *ngIf="post.message" class="message">
+                    {{post.message}}
+                </div>
+
+                <div *ngIf="post.media" class="media">
+                    <img *ngIf="post.media.type === 'image'" [src]="post.media.preview">
+                    <div *ngIf="post.media.type === 'video'" [innerHtml]="post.media.embed"></div>
+                </div>
+
+                <div *ngIf="post.article" fxLayout="column" class="article">
+                    <div class="media">
+                        <img [src]="post.article.media.preview">
+                    </div>
+                    <div class="title">{{post.article.title}}</div>
+                    <div class="subtitle">{{post.article.subtitle}}</div>
+                    <div class="excerpt">{{post.article.excerpt}}</div>
+                </div>
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <button mat-button class="like-button">
+                            <span fxLayout="row" fxLayoutAlign="start center">
+                                <mat-icon class="s-16">favorite</mat-icon>
+                                <span>Like</span>&nbsp;<span>({{post.like}})</span>
+                            </span>
+                        </button>
+                        <button mat-button class="comment-button">
+                            <span fxLayout="row" fxLayoutAlign="start center">
+                                <mat-icon class="s-16">comment</mat-icon>
+                                <span>Comment</span>
+                            </span>
+                        </button>
+                        <button mat-button class="share-button">
+                            <span fxLayout="row" fxLayoutAlign="start center">
+                                <mat-icon class="s-16">share</mat-icon>
+                                <span>Share</span>&nbsp;<span>({{post.share}})</span>
+                            </span>
+                        </button>    
+                    </div>
+
+                    <button mat-button *ngIf="post.comments" class="comment-count">
+                        <span fxLayout="row" fxLayoutAlign="end center">
+                            <span>{{post.comments.length}} comments</span>&nbsp;<mat-icon class="s-16">keyboard_arrow_down</mat-icon>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <footer class="" fxLayout="column" fxLayoutAlign="start start">
+
+                <div class="comment" fxLayout="column" fxFlexFill *ngFor="let comment of post.comments">
+                    <div fxLayout="row" fxFlexFill>
+                        <img [src]="comment.user.avatar" class="avatar"/>
+
+                        <div fxLayout="column" fxFlex>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <span class="username">{{comment.user.name}}</span>
+                                <span class="time">{{comment.time}}</span>
+                            </div>
+                            <div class="message">
+                                {{comment.message}}
+                            </div>
+                            <div class="actions" fxLayout="row" fxLayoutAlign="start center">
+                                <a class="reply-button">Like</a>
+                                <a class="reply-button">Reply</a>&nbsp;|&nbsp; Like1
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ml-48" fxLayout="column" fxLayoutAlign="start start" *ngIf="comment.comments && comment.comments.length > 0">
+                        <div class="comment" fxLayout="row" fxFlexFill *ngFor="let subComment of comment.comments">
+                            <img [src]="subComment.user.avatar" class="avatar"/>
+
+                            <div fxLayout="column" fxFlex>
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <span class="username">{{subComment.user.name}}</span>
+                                    <span class="time">{{subComment.time}}</span>
+                                </div>
+                                <div class="message">
+                                    {{subComment.message}}
+                                </div>
+                                <div class="actions" fxLayout="row" fxLayoutAlign="start center">
+                                    <a class="reply-button">Like</a>
+                                    <a class="reply-button">Reply</a>&nbsp;|&nbsp; Like1
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reply" fxLayout="row" fxFlexFill>
+                            <img src="assets/images/avatars/Barrera.jpg" class="avatar"/>
+
+                            <app-feed-post-area fxFlex [isRoot]="false"></app-feed-post-area>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reply" fxLayout="row" fxFlexFill>
+                    <img src="assets/images/avatars/Barrera.jpg" class="avatar"/>
+                    <app-feed-post-area fxFlex [isRoot]="false"></app-feed-post-area>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</div>
+
